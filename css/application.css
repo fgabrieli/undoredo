@@ -1,0 +1,20 @@
+.undo-redo-container {
+  width: 124px;
+  position: absolute;
+  left: calc(50% - 62px);
+  top: 10%;
+}
+
+.commands-container {
+  width: 202px;
+  position: absolute;
+  left: calc(50% - 101px);
+  top: 20%;
+}
+
+#text {
+  width: 800px;
+  position: absolute;
+  left: calc(50% - 400px);
+  top: 30%;
+}

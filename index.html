@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+<head>
+
+<!-- 3rd party -->
+<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="
+  crossorigin="anonymous"></script>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+<!-- App specific -->
+<link href="css/application.css" rel="stylesheet" type="text/css" />
+
+<!-- <script src="js/undoredo.js"></script> -->
+<!-- <script src="js/application.js"></script> -->
+<script src="js/text-component.js"></script>
+</head>
+<body>
+
+  <div class="undo-redo-container">
+    <button class="btn btn-primary" onClick="UndoManager.undo()">Undo</button>
+    <button class="btn btn-primary" onClick="UndoManager.redo()">Redo</button>
+  </div>
+
+  <div class="commands-container">
+    <button class="btn btn-default" onClick="TextComponent.execute('bold')">Bold</button>
+    <button class="btn btn-default" onClick="TextComponent.execute('italic')">Italic</button>
+    <button class="btn btn-default" onClick="TextComponent.execute('underline')">Underline</button>
+  </div>
+
+  <div id="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc convallis urna non mattis cursus. Donec sollicitudin
+    nibh in nisl luctus, ut pharetra sapien volutpat. Donec lacus sapien, dapibus imperdiet cursus ut, vestibulum eget leo. Maecenas
+    porttitor vestibulum odio. Cras scelerisque justo non est volutpat sagittis. Mauris vel lobortis odio, sit amet blandit mauris. Morbi eu
+    est feugiat, ornare nulla at, dignissim nisi. Vestibulum vestibulum mauris fermentum velit faucibus tincidunt. Donec quis nisl in nunc
+    gravida feugiat vitae eu erat. Proin vestibulum cursus gravida. Etiam vel laoreet mauris. Donec ac sem eleifend, condimentum eros quis,
+    laoreet nisl. Donec id porta dolor.</div>
+
+</body>
+</html>
