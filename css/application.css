@@ -6,9 +6,9 @@
 }
 
 .commands-container {
-  width: 202px;
+  width: 292px;
   position: absolute;
-  left: calc(50% - 101px);
+  left: calc(50% - 145px);
   top: 20%;
 }
 

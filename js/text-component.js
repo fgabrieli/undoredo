@@ -1,4 +1,6 @@
-var TextComponent = $.extend(true, {}, UndoableComponent, {
+var neo = neo ? neo : {};
+
+neo.TextComponent = $.extend(true, {}, webcom.Undoable, {
     setup : function() {
         this.setupCommands();
     },
@@ -20,8 +22,8 @@ var TextComponent = $.extend(true, {}, UndoableComponent, {
             t.getEl().style.fontWeight = 'bold';
 
             if (push) {
-                UndoManager.push({
-                    target : TextComponent,
+                webcom.UndoManager.push({
+                    target : this,
                     command : 'bold',
                     params : {},
                     snapshot : snapshot
@@ -49,8 +51,8 @@ var TextComponent = $.extend(true, {}, UndoableComponent, {
             t.getEl().style.fontStyle = 'italic';
 
             if (push) {
-                UndoManager.push({
-                    target : TextComponent,
+                webcom.UndoManager.push({
+                    target : this,
                     command : 'italic',
                     params : {},
                     snapshot : snapshot
@@ -78,8 +80,8 @@ var TextComponent = $.extend(true, {}, UndoableComponent, {
             t.getEl().style.textDecoration = 'underline';
 
             if (push) {
-                UndoManager.push({
-                    target : TextComponent,
+                webcom.UndoManager.push({
+                    target : this,
                     command : 'underline',
                     params : {},
                     snapshot : snapshot
@@ -96,11 +98,13 @@ var TextComponent = $.extend(true, {}, UndoableComponent, {
         // rotate
         this.addCommand('rotate', rotate, rotateBack);
 
-        function rotate(angle) {
+        function rotate(angle, push) {
             var transform = t.getEl().style.transform;
 
             var deg = 0;
             if (transform && transform.length > 0) {
+                // this command works as an example, it is NOT intended to go
+                // into production servers :)
                 deg = parseFloat(transform.match(/\d+/)[0]);
             }
 
@@ -112,12 +116,14 @@ var TextComponent = $.extend(true, {}, UndoableComponent, {
             // for this example i consider deg only
             t.getEl().style.transform = 'rotate(' + deg + 'deg)';
 
-            UndoManager.push({
-                target : TextComponent,
-                command : 'rotate',
-                params : angle,
-                snapshot : snapshot
-            })
+            if (push) {
+                webcom.UndoManager.push({
+                    target : this,
+                    command : 'rotate',
+                    params : angle,
+                    snapshot : snapshot
+                })
+            }
         }
 
         function rotateBack(params, snapshot) {
@@ -133,5 +139,5 @@ var TextComponent = $.extend(true, {}, UndoableComponent, {
 })
 
 {
-    TextComponent.setup();
+    neo.TextComponent.setup();
 }
