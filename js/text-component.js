@@ -1,4 +1,3 @@
-
 var TextComponent = $.extend(true, {}, UndoableComponent, {
     setup : function() {
         this.setupCommands();
@@ -10,7 +9,7 @@ var TextComponent = $.extend(true, {}, UndoableComponent, {
         // bold
         this.addCommand('bold', setBold, unsetBold);
 
-        function setBold() {
+        function setBold(params, push) {
             var fontWeight = t.getEl().style.fontWeight;
             if (fontWeight == 'bold')
                 return;
@@ -20,12 +19,14 @@ var TextComponent = $.extend(true, {}, UndoableComponent, {
 
             t.getEl().style.fontWeight = 'bold';
 
-            UndoManager.push({
-                target : TextComponent,
-                command : 'bold',
-                params : {},
-                snapshot : snapshot
-            })
+            if (push) {
+                UndoManager.push({
+                    target : TextComponent,
+                    command : 'bold',
+                    params : {},
+                    snapshot : snapshot
+                })
+            }
         }
 
         function unsetBold(params, snapshot) {
@@ -37,7 +38,7 @@ var TextComponent = $.extend(true, {}, UndoableComponent, {
         // italic
         this.addCommand('italic', setItalic, unsetItalic);
 
-        function setItalic() {
+        function setItalic(params, push) {
             var fontStyle = t.getEl().style.fontStyle;
             if (fontStyle == 'italic')
                 return;
@@ -47,12 +48,14 @@ var TextComponent = $.extend(true, {}, UndoableComponent, {
 
             t.getEl().style.fontStyle = 'italic';
 
-            UndoManager.push({
-                target : TextComponent,
-                command : 'italic',
-                params : {},
-                snapshot : snapshot
-            })
+            if (push) {
+                UndoManager.push({
+                    target : TextComponent,
+                    command : 'italic',
+                    params : {},
+                    snapshot : snapshot
+                })
+            }
         }
 
         function unsetItalic(params, snapshot) {
@@ -64,7 +67,7 @@ var TextComponent = $.extend(true, {}, UndoableComponent, {
         // underline
         this.addCommand('underline', setUnderline, unsetUnderline);
 
-        function setUnderline() {
+        function setUnderline(params, push) {
             var textDecoration = t.getEl().style.textDecoration;
             if (textDecoration == 'underline')
                 return;
@@ -74,12 +77,14 @@ var TextComponent = $.extend(true, {}, UndoableComponent, {
 
             t.getEl().style.textDecoration = 'underline';
 
-            UndoManager.push({
-                target : TextComponent,
-                command : 'underline',
-                params : {},
-                snapshot : snapshot
-            })
+            if (push) {
+                UndoManager.push({
+                    target : TextComponent,
+                    command : 'underline',
+                    params : {},
+                    snapshot : snapshot
+                })
+            }
         }
 
         function unsetUnderline(params, snapshot) {
@@ -87,13 +92,45 @@ var TextComponent = $.extend(true, {}, UndoableComponent, {
 
             t.getEl().style.textDecoration = previoustextDecoration;
         }
+
+        // rotate
+        this.addCommand('rotate', rotate, rotateBack);
+
+        function rotate(angle) {
+            var transform = t.getEl().style.transform;
+
+            var deg = 0;
+            if (transform && transform.length > 0) {
+                deg = parseFloat(transform.match(/\d+/)[0]);
+            }
+
+            deg += angle;
+
+            var snapshot = {};
+            snapshot.transform = transform;
+
+            // for this example i consider deg only
+            t.getEl().style.transform = 'rotate(' + deg + 'deg)';
+
+            UndoManager.push({
+                target : TextComponent,
+                command : 'rotate',
+                params : angle,
+                snapshot : snapshot
+            })
+        }
+
+        function rotateBack(params, snapshot) {
+            var previousTransform = snapshot.transform;
+
+            t.getEl().style.transform = previousTransform;
+        }
     },
 
     getEl : function() {
         return document.getElementById('text');
     },
 })
-
 
 {
     TextComponent.setup();

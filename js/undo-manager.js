@@ -4,11 +4,9 @@ var UndoManager = {
     index : -1,
 
     push : function(commandData) {
-        var isNewCommand = (typeof this.stack[this.index + 1] == 'undefined' || this.stack[this.index + 1].command != commandData.command);
-        if (isNewCommand) {
-            this.clearRedo();
-            this.stack.push(commandData);
-        }
+        this.clearRedo();
+
+        this.stack.push(commandData);
 
         this.index++;
     },

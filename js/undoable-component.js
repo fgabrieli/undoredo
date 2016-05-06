@@ -8,8 +8,10 @@ var UndoableComponent = {
         }
     },
 
-    execute : function(command, params) {
-        this.commands[command].execute(params);
+    execute : function(command, params, push) {
+        var _push = (push ? push : true);
+        
+        this.commands[command].execute(params, _push);
     },
 
     unexecute : function(command, params, snapshot) {

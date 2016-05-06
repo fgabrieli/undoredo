@@ -16,8 +16,8 @@
 <!-- App specific -->
 <link href="css/application.css" rel="stylesheet" type="text/css" />
 
-<!-- <script src="js/undoredo.js"></script> -->
-<!-- <script src="js/application.js"></script> -->
+<script src="js/undo-manager.js"></script>
+<script src="js/undoable-component.js"></script>
 <script src="js/text-component.js"></script>
 </head>
 <body>
@@ -31,6 +31,7 @@
     <button class="btn btn-default" onClick="TextComponent.execute('bold')">Bold</button>
     <button class="btn btn-default" onClick="TextComponent.execute('italic')">Italic</button>
     <button class="btn btn-default" onClick="TextComponent.execute('underline')">Underline</button>
+    <button class="btn btn-default" onClick="TextComponent.execute('rotate', 45)">Rotate 45</button>
   </div>
 
   <div id="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc convallis urna non mattis cursus. Donec sollicitudin
